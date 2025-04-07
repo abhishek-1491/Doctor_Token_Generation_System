@@ -1,0 +1,94 @@
+body{
+    margin: 0;
+    padding: 0;
+    /* background-color: cyan; */
+    
+}
+.main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90vh;
+    /* background-color: red; */
+}
+.row{
+    float: left;
+}
+
+.container{
+    width: 30%;
+    /* border: 1px solid; */
+    margin: 20px;
+    padding: 0px 20px 0px 0px;
+    margin-top: 6%;
+    /* background-color: aliceblue; */
+}
+.form-container{
+    /* display: none; */
+    background-color: aliceblue;
+    padding: 20px 0px 20px 20px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgb(216, 185, 185);
+}
+.form-container h1{
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 35px;
+}
+.form-container .form-group{
+    width: 50%;
+}
+.form-group input{
+    width: 80%;
+    height: 25px;
+    padding: 5px 10px;
+    margin: 10px 0;
+    border: none;
+}
+#faddress{
+    width: 100%;
+    input{
+        width: 90%;
+    }
+}
+
+.form-group textarea{
+    width: 187%;
+    border: none;
+    margin: 10px 0;
+}
+.form-group button{
+    margin: 15px 0px;
+    /* width: 80%; */
+    padding: 7px 20px;
+    border: none;
+    background-color: blueviolet;
+    color: white;
+    font-size: large;
+    transition: 0.3s ease-in-out;
+
+}
+.form-group button:hover{
+    cursor: pointer;
+    scale: 1.1;
+    background-color: orange;
+    transition: 0.3s ease-in-out;
+}
+
+.date{
+    position: absolute;
+    
+}
+.appointment-details{
+    /* background-color: red; */
+    /* display: none; */
+    padding: 15px;
+    box-shadow: 0 0 10px rgb(212, 181, 181);
+
+    h1{
+        text-align: center;
+    }
+}
+

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .main-container {
+            /* background-color: red; */
+            height: 100vh;
+            align-items: start;
+            
+        }
+
+        .container {
+            margin-top: 5%;
+        }
+
+        input {
+            width: 100%;
+            height: 25px;
+            margin-bottom: 20px;
+            background-color: aqua;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: medium;
+        }
+
+        .patient-details {
+            /* display: none; */
+            width: 100%;
+            /* padding: 30px; */
+            /* height: 10vh; */
+            /* background-color: aliceblue; */
+        }
+
+        table {
+            font-size: large;
+            border: 1px solid;
+            width: 100%;
+        }
+
+        th {
+            text-align: left;
+            height: 30px;
+        }
+
+        th:nth-child(2) {
+            width: 20px;
+            padding-left: 15px;
+        }
+
+        button {
+            padding: 8px 20px;
+            background-color: blue;
+            color: white;
+            font-size: large;
+            border: none;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
+
+        .patient-details button {
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="container">
+            <h1>Welcome Doctor Name </h1>
+            <input type="text" id="token_no" placeholder="Enter Patient Token No">
+            <button>Get Patient</button>
+            <br><br><br>
+            <div class="patient-details" id="patient-details">
+                <table>
+                    <tr>
+                        <th>Token No</th>
+                        <th>:</th>
+                        <td id="token">101</td>
+                    </tr>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>:</th>
+                        <td id="p_name">Abhishek Hingmire</td>
+                    </tr>
+                    <tr>
+                        <th>Contact No</th>
+                        <th>:</th>
+                        <td id="p_mobile">9527974938</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <th>:</th>
+                        <td id="p_email">abhi@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <th>Appointment Reason</th>
+                        <th>:</th>
+                        <td id="p_reason">lorem30</td>
+                    </tr>
+                </table>
+
+                <button>Patient Attempt</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    function getPatient() {
+        let token = document.getElementById("token_no").value;
+        let details = document.getElementById("patient-details");
+        details.style.display = "block";
+
+        var data = {
+            token: token
+        }
+        fetch("getPatient.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result['status'] == "success") {
+                    console.log(result["patient"]);
+                    details.innerHTML = `
+                    <table>
+                    <tr>
+                        <th>Token No</th>
+                        <th>:</th>
+                        <td id="token">${result["patient"]["token"]}</td>
+                    </tr>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>:</th>
+                        <td id="p_name">${result["patient"]["first_name"]} ${result["patient"]["last_name"]}</td>
+                    </tr>
+                    <tr>
+                        <th>Contact No</th>
+                        <th>:</th>
+                        <td id="p_mobile">${result["patient"]["mobile"]}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <th>:</th>
+                        <td id="p_email">${result["patient"]["email"]}</td>
+                    </tr>
+                    <tr>
+                        <th>Appointment Reason</th>
+                        <th>:</th>
+                        <td id="p_reason">${result["patient"]["reason"]}</td>
+                    </tr>
+                </table>
+
+                <button>Patient Attempt</button>
+                    `;
+
+                }
+                else if (result['status'] == "failed") {
+                    console.log("failed");
+                }
+            })
+            .catch(error => console.log("Error  ", error))
+
+    }
+</script>
+
+</html>
